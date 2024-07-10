@@ -90,3 +90,15 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.completed {
+  text-decoration: line-through;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-text{
+  font-size: 30px;
+}

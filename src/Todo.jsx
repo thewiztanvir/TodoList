@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Header from "./Header.jsx";
-import { useState } from "react";
+
 
 function Todo() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
 
   function handleChange(e) {
     setInputValue(e.target.value);
@@ -13,7 +14,15 @@ function Todo() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setTodos([...todos, inputValue]);
+    if (editIndex !== null) {
+      const updatedTodos = todos.map((todo, index) =>
+        index === editIndex ? { ...todo, text: inputValue } : todo
+      );
+      setTodos(updatedTodos);
+      setEditIndex(null);
+    } else {
+      setTodos([...todos, { text: inputValue, completed: false }]);
+    }
     setInputValue("");
   }
 
@@ -23,10 +32,24 @@ function Todo() {
     setTodos(newTodos);
   };
 
+  const handleEdit = (index) => {
+    setInputValue(todos[index].text);
+    setEditIndex(index);
+  };
+
+  const handleComplete = (index) => {
+    const updatedTodos = todos.map((todo, idx) =>
+      idx === index ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+  };
+
+  const incompleteTodos = todos.filter(todo => !todo.completed).length;
+
   return (
     <>
       <div className="container">
-        <Header className="header" todos_completed={todos.length} total_todos={todos.length}  />
+        <Header className="header" todos_completed={incompleteTodos} total_todos={todos.length} />
 
         <div className="task-list-part">
           <h1>Todo List</h1>
@@ -38,13 +61,19 @@ function Todo() {
               onChange={handleChange}
             />
             <button className="btn" onClick={handleSubmit}>
-              +
+              {editIndex !== null ? "Edit" : "+"}
             </button>
           </form>
           <ul>
             {todos.map((todo, index) => (
-              <li className="task-list" key={index}>
-                {todo}
+              <li className={`task-list ${todo.completed ? "completed" : ""}`} key={index}>
+                <input
+                  type="radio"
+                  checked={todo.completed}
+                  onChange={() => handleComplete(index)}
+                />
+                {todo.text}
+                <button onClick={() => handleEdit(index)}>Edit</button>
                 <button onClick={() => handleDelete(index)}>Delete</button>
               </li>
             ))}
