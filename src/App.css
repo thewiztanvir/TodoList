@@ -37,18 +37,26 @@
   }
 }
 
-
+.appBG{
+  background-color: black;
+}
 .container{
-  padding: 0% 20%;
+  padding: 10% 20%;
   justify-content: center;
   align-items: center;
+  background-color: black;
  
   
 }
-
+.card{
+  border: 1px solid lime;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px 5px lime;
+}
 .task-done{
   display: flex;
-  background-color: darkorange;
+  
   
 }
 .numbers{
@@ -56,11 +64,24 @@
   font-size: 20px;
 }
 .header{
-  background-color: bisque;
+  color: white;
   align-items: center;
+  padding: 15px;
+  box-shadow: inset 0 0 5px lime;
+  border-radius: 10px;
 }
+
 .header-text{
   padding: 15px;
+  font-size: 30px;
+  color: gold;
+  border: 1px solid white;
+}
+
+.header-top p{
+  font-size: 20px;
+  font-weight: bold;
+  
 }
 .task-list-part{
   background-color: black;
@@ -71,13 +92,35 @@
   padding-top: 10px;
   padding-left: 10px;
 }
-
-.btn{
-  margin-left: 5px;
+.input-style{
   height: 30px;
-  width: 30px;
+  width: 25%;
+  border-radius: 10px;
+  padding: 5px;
+  border: 1px solid lime;
+}
+.input-style:focus{
+  background: lime;
+  color: black;
+  border: white;
+}
+
+.listStyle{
+  box-shadow: inset 0 0 5px lime;
+  margin-top: 10px;
+  padding: 10px;
+  
+  border-radius: 10px;
+  list-style: none;
+  border: 2px solid lime;
+  margin-left: -30px;
+}
+.btn{
+  margin-left: 10px;
+  height: 45px;
+  width: 45px;
   border-radius: 50%;
-  background-color: greenyellow;
+  background-color: lime;
   font-size: larger;
 }
 .form{
@@ -85,9 +128,8 @@
 }
 .task-list{
   color: white;
-  padding: 15px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; ;
   align-items: center;
 }
 
